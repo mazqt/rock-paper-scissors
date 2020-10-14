@@ -7,11 +7,6 @@
             return moves[choice];
         }
 
-        //console.log(computerPlay());
-
-        //let computerSelection = computerPlay();
-        //let playerSelection = "Rock";
-
         function playRound(PC, CPU) {
             if (PC === CPU) {
                 return "Draw!"
@@ -26,8 +21,6 @@
                 return `You lose! ${capitalize(CPU)} beats ${PC}`;
             }
         }
-
-        //console.log(playRound(playerSelection, computerSelection))
 
         function game() {
             let pcScoreCount = 0;
