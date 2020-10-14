@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <script>
+        function computerPlay() {
+            moves = ["rock", "paper", "scissors"];
+            choice = Math.floor(Math.random()* 3);
+            return moves[choice];
+        }
+
+        //console.log(computerPlay());
+
+        //let computerSelection = computerPlay();
+        //let playerSelection = "Rock";
+
+        function playRound(PC, CPU) {
+            if (PC === CPU) {
+                return "Draw!"
+            } 
+            else if (
+                (PC === "rock" && CPU === "scissors" ||
+                 PC === "scissors" && CPU === "paper" ||
+                 PC === "paper" && CPU === "rock")) {
+                return `You win! ${capitalize(PC)} beats ${CPU}`;
+                }
+            else {
+                return `You lose! ${capitalize(CPU)} beats ${PC}`;
+            }
+        }
+
+        //console.log(playRound(playerSelection, computerSelection))
+
+        function game() {
+            let pcScoreCount = 0;
+            let cpuScoreCount = 0;
+
+            while (pcScoreCount < 3 && cpuScoreCount < 3) {
+                console.log(`The score is ${pcScoreCount} to ${cpuScoreCount}! Make a move.`);
+                let playerSelection = playerChoice()
+                let computerSelection = computerPlay();
+                let result = playRound(playerSelection, computerSelection);
+                console.log(result);
+                if (result.slice(0,8) === "You win!") {
+                    pcScoreCount++;
+                }
+                else if (result.slice(0, 9) === "You lose!") {
+                    cpuScoreCount++;
+                }
+
+            }
+            if (pcScoreCount === 3) {
+                return `You won ${pcScoreCount} to ${cpuScoreCount}`;
+            }
+            else {
+                return `You lost ${cpuScoreCount} to ${pcScoreCount}`;
+            }
+
+        }
+
+        function playerChoice() {
+            let playerSelection = prompt("Pick rock, paper, or scissor").trim().toLowerCase();
+            if (
+                !(playerSelection === "rock" ||
+                playerSelection === "paper" ||
+                playerSelection === "scissor")
+            ) { 
+                console.log("Enter a valid choice")
+                playerChoice()
+            }
+            return playerSelection
+        }
+
+        function capitalize(string) {
+            return string.slice(0, 1).toUpperCase() + string.slice(1).toLowerCase();
+        }
+
+    </script>
+</html>
