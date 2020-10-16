@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <button id="rock">I choose rock!</button>
+    <button id="paper">I choose paper!</button>
+    <button id="scissors">I choose scissors!</button>
+
+    <div id="results">
+        <p id="yourScore">Your Score: 0</p>
+        <p id="pcScore">Opponent's Score: 0</p>
+        <h2 id="display"></h2>
+    </div>
+
+    <script>
+        const yourScoreboard = document.querySelector("#yourScore");
+        const pcScoreboard = document.querySelector("#pcScore");
+        const display = document.querySelector('#display');
+
+
+        let yourScore = 0
+        let pcScore = 0
+        const buttons = document.querySelectorAll("button");
+        buttons.forEach((button) => {
+            button.addEventListener("click", () => {
+                if (yourScore < 5 && pcScore < 5) {
+                    playRound(button.id, computerPlay());
+                }
+            })
+        })
+
+        function computerPlay() {
+            moves = ["rock", "paper", "scissors"];
+            choice = Math.floor(Math.random() * 3);
+            return moves[choice];
+        }
+
+        function playRound(PC, CPU) {
+            if (PC === CPU) {
+                display.textContent = "Draw"
+            }
+            else if (
+                (PC === "rock" && CPU === "scissors" ||
+                    PC === "scissors" && CPU === "paper" ||
+                    PC === "paper" && CPU === "rock")) {
+                yourScoreboard.textContent = yourScoreboard.textContent.slice(
+                    0, yourScoreboard.textContent.length -1) + ++yourScore;
+                if (yourScore === 5) {
+                    const results = document.querySelector('#results');
+                    display.textContent = "You won!";
+                } else {
+                    display.textContent = `${ capitalize(PC) } beats ${ CPU }`
+                }
+            }
+            else {
+                pcScoreboard.textContent = pcScoreboard.textContent.slice(
+                    0, pcScoreboard.textContent.length - 1) + ++pcScore;
+                if (pcScore === 5) {
+                    const results = document.querySelector('#results');
+                    display.textContent = "You lost!";
+                } else {
+                    display.textContent = `${capitalize(CPU)} beats ${PC}`
+                }
+            }
+        }
+
+        function capitalize(string) {
+                return string.slice(0, 1).toUpperCase() + string.slice(1).toLowerCase();
+            }
+
+    </script>
+</body>
+
+</html>
